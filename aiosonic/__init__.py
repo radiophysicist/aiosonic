@@ -1,5 +1,6 @@
 """Main module."""
 
+import logging
 import re
 import asyncio
 from asyncio import get_event_loop, wait_for
@@ -155,6 +156,7 @@ class HttpResponse:
         res = re.match(_HTTP_RESPONSE_STATUS_LINE,
                        data.decode().rstrip('\r\n'))
         if not res:
+            logging.warn('Response data: %s', data.decode())
             raise HttpParsingError('response line parsing error')
         self.response_initial = res.groupdict()
 
