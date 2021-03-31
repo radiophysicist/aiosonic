@@ -236,7 +236,7 @@ async def _request_with_body(
     """Do post http request. """
     if not data and not json:
         TypeError('missing argument, either "json" or "data"')
-    if json:
+    if json is not None:
         data = json_serializer(json)
         headers = headers or HTTPHeaders()
         headers.update({
